@@ -1,0 +1,17 @@
+{
+    "company": {
+      "name": "School Website CMS",
+      "address": "Sanothimi, Bhaktapur, Nepal"
+    },
+
+    "main_module": "Main Module",
+    "commodity_category": "Commodity Category",
+    "commodity": "Commodity",
+    "system_setting": "System Setting",
+    "district": "District",
+    "ecozone": "Ecozone",
+    "season": "Season",
+
+    "role": "Role",
+    "add_new": "Add New"
+}

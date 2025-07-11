@@ -1,0 +1,56 @@
+{
+    "company": {
+      "name": "Teachers Service Commission",
+      "address": "Sanothimi, Bhaktapur, Nepal"
+    },
+
+    "personal_detail": "Personal Detail",
+    "full_name_nepali": "Full Name in Nepali",
+    "full_name_english": "Full Name in English",
+
+    "job_posts": "Job Posts",
+    "application_full": "Application Full",
+    "application_report": "Application Report",
+    "outgoing_report": "Outgoing Report",
+    "incoming_report": "Incoming Report",
+
+    "settings": "Settings",
+    "exam_fees": "Exam Fees",
+    "bank_accounts": "Bank Accounts",
+    "subjects": "Subjects",
+    "document_types": "Document Types",
+    "genders": "Genders",
+    "inclusion_groups": "Inclusion Groups",
+    "education_levels": "Education Levels",
+    "education_grades": "Education Grades",
+    "education_divisions": "Education Divisions",
+    "education_institutes": "Education Institutes",
+    "training_names": "Training Names",
+    "training_institutes": "Training Institutes",
+    "provinces": "Provinces",
+    "districts": "Districts",
+    "local_gov_bodies": "Local Gov Bodies",
+
+    "access_rights": "Access Rights",
+    "users": "Users",
+    "user_posts": "User Posts",
+    "roles": "Roles",
+    "profile": "Profile",
+
+    "id": "Id",
+    "title": "Title",
+    "rank": "Rank",
+    "is_published": "Is Published",
+    "actions": "Actions",
+    "requires_training": "Requires training",
+    "training": "Training",
+    "published_date": "Published date",
+    "account_number": "Account number",
+    "name": "Name",
+    "email": "Email",
+    "position": "Position",
+    "salary": "Salary",
+    "active": "Active",
+    "inactive": "Inactive",
+    "add_new": "Add New"
+}

@@ -1,0 +1,425 @@
+import React, { useState, useEffect } from "react";
+import Voucher from "@/pages/admin/application/voucher";
+import { images } from "@/assets/images";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+const NEXT_PUBLIC_MEDIA_URL = process.env.NEXT_PUBLIC_MEDIA_URL;
+
+const ApplicationStatus = ({ candidateDatas, onDetailsChange }) => {
+  const [details, setDetails] = useState({
+    training_id: [],
+    education_id: [],
+    document_id: [],
+  });
+  const router = useRouter();
+
+  const handlePrintCertificate = () => {
+    router.push(`/candidate/apply/newvoucher`);
+  };
+
+  const handleAdmitCard = () => {
+    router.push(`/candidate/apply/admitcard`);
+  };
+
+  // ApplicationStatus.propTypes = {
+  //   candidateData: PropTypes.object.isRequired
+  // };
+
+  const handleCheckboxChange = (id, category) => {
+    setDetails((prevDetails) => {
+      const updatedCategory = prevDetails[category].includes(id)
+        ? prevDetails[category].filter((selectedId) => selectedId !== id)
+        : [...prevDetails[category], id];
+
+      return { ...prevDetails, [category]: updatedCategory };
+    });
+  };
+
+  useEffect(() => {
+    if (onDetailsChange) {
+      onDetailsChange(details);
+    }
+  }, [details, onDetailsChange]);
+
+  return (
+    <div>
+      {candidateDatas && (
+        <div className="p-6 bg-gray-100 min-h-screen">
+          {/* Header Section */}
+          <div className="bg-white p-4 shadow rounded-lg mb-6 border border-gray-200">
+            <h1 className="text-xl font-bold mb-1">
+              व्यक्तिगत विवरण, तालिम, शिक्षा र कागजातहरू
+            </h1>
+            <p className="text-gray-500 text-sm">
+              निम्न विवरणहरू तपाईंको आवेदनको साथ पठाइनेछ । आवेदन बुझाउनु अघि यी
+              विवरणहरू ठीक छन् भन्ने निश्चित गर्नुहोला ।
+            </p>
+            <p className="text-blue-800 text-sm">
+              यदि यी विवरणहरूमा कुनै परिवर्तन आवश्यक छ भने, अहिले नै तपाइँ बायाँ
+              तर्फबाट सम्बन्धित पृष्ठमा गएर अद्यावधिक गर्न सक्नुहुनेछ । आवेदन
+              बुझाइ सके पछि गरिएको परिवर्तन आवेदनमा समाविष्ट हुनेछैन ।
+            </p>
+          </div>
+
+          {/* Personal Details */}
+          <div className="bg-white p-6 shadow rounded-lg mb-6 border border-gray-200">
+            <h2 className="text-lg font-bold mb-4">व्यक्तिगत विवरण</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p>
+                  <span className="font-semibold">पूरा नाम (देवनागरीमा):</span>{" "}
+                  घेोउउरेय
+                </p>
+                <p>
+                  <span className="font-semibold">बीचको नाम:</span> णेिल थरान
+                </p>
+                <p>
+                  <span className="font-semibold">थर:</span> ंछछराय
+                </p>
+                <p>
+                  <span className="font-semibold">पूरा नाम (अंग्रेजीमा):</span>{" "}
+                  Caryn Sandra Manning Bush
+                </p>
+                <p>
+                  <span className="font-semibold">लिङ्ग:</span> महिला
+                </p>
+                <p>
+                  <span className="font-semibold">जन्म मिति:</span> 2033-01-01
+                </p>
+              </div>
+              <div>
+                <p>
+                  <span className="font-semibold">नागरिकता नम्बर:</span> 738
+                </p>
+                <p>
+                  <span className="font-semibold">
+                    नागरिकता जारी भएको जिल्ला:
+                  </span>{" "}
+                  काभ्रेपलान्चोक
+                </p>
+                <p>
+                  <span className="font-semibold">
+                    नागरिकता जारी भएको मिति:
+                  </span>{" "}
+                  2071-12-23
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Address Details */}
+          <div className="bg-white p-6 shadow rounded-lg mb-6 border border-gray-200">
+            <h2 className="text-lg font-bold mb-4">पारिवारिक विवरण</h2>
+            <p>बाबुको नाम : कृष्ण बहादुर के. सी.</p>
+            <p>आमाको नाम : पबित्रा श्रेष्ठ</p>
+            <p>हजुरबुबाको नाम : लक्ष्मण बहादुर के। सी।</p>
+            <p>श्रीमान / श्रीमती को नाम:</p>
+
+            <h2 className="text-lg font-bold mt-6 mb-4">स्थायी ठेगाना</h2>
+            <p>प्रदेश: गण्डकी प्रदेश</p>
+            <p>जिल्ला: मनाङ</p>
+            <p>स्थानीय तह: चामे</p>
+            <p>वार्ड नं: 12</p>
+            <p>टोल: झेरमािने अुउउमान</p>
+            <p>इमेल: reqydoz@mailinator.com</p>
+
+            <h2 className="text-lg font-bold mt-6 mb-4">सम्पर्क ठेगाना</h2>
+            <p>प्रदेश: गण्डकी प्रदेश</p>
+            <p>जिल्ला: मनाङ</p>
+            <p>स्थानीय तह: नार्पा भूमी</p>
+            <p>वार्ड नं: 12</p>
+            <p>टोल: ळुके ंुरराय</p>
+            <p>इमेल: fivasor@mailinator.com</p>
+          </div>
+
+          {/* न्यूनतम शैक्षिक योग्यता */}
+          <div className="bg-white p-6 shadow rounded-lg mb-6 border border-gray-200">
+            <h2 className="text-lg font-bold mb-4">न्यूनतम शैक्षिक योग्यता</h2>
+            <table className="w-full border-collapse border border-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="border border-gray-300 p-2">क्रम सं.</th>
+                  <th className="border border-gray-300 p-2">शिक्षण संस्था</th>
+                  <th className="border border-gray-300 p-2">तह</th>
+                  <th className="border border-gray-300 p-2">
+                    उत्तीर्ण वर्ष (बि.सं.)
+                  </th>
+                  <th className="border border-gray-300 p-2">
+                    उत्तीर्ण वर्ष (ई.सं.)
+                  </th>
+                  <th className="border border-gray-300 p-2">श्रेणी</th>
+                </tr>
+              </thead>
+              {Array.isArray(candidateDatas) &&
+                candidateDatas.map(
+                  (candidateData, index) =>
+                    candidateData &&
+                    Array.isArray(candidateData.candidate_education) &&
+                    candidateData.candidate_education.length > 0 && (
+                      <tbody key={`education-${index}`}>
+                        {candidateData.candidate_education.map(
+                          (education, eduIndex) => (
+                            <React.Fragment key={`education-${eduIndex}`}>
+                              {/* Row for Level Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input type="checkbox" />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Level
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.level_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.level_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.level_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.level_detail?.published_date}
+                                </td>
+                              </tr>
+                              {/* Row for Institute Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={details.education_id.includes(
+                                      education.level_detail?.id
+                                    )}
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        education.level_detail?.id,
+                                        "education_id"
+                                      )
+                                    }
+                                  />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Institute
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.institute_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.institute_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.institute_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.institute_detail?.published_date}
+                                </td>
+                              </tr>
+                              {/* Row for Grade Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input type="checkbox" />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Grade
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.grade_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.grade_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.grade_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.grade_detail?.published_date}
+                                </td>
+                              </tr>
+                              {/* Row for Division Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input type="checkbox" />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Division
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.division_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.division_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.division_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {education.division_detail?.published_date}
+                                </td>
+                              </tr>
+                            </React.Fragment>
+                          )
+                        )}
+                      </tbody>
+                    )
+                )}
+            </table>
+          </div>
+
+          {/* न्यूनतम तालिम */}
+          <div className="bg-white p-6 shadow rounded-lg mb-6 border border-gray-200">
+            <h2 className="text-lg font-bold mb-4">न्यूनतम तालिम</h2>
+            <table className="w-full border-collapse border border-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="border border-gray-300 p-2"></th>
+                  <th className="border border-gray-300 p-2">क्रम सं.</th>
+                  <th className="border border-gray-300 p-2">
+                    तालिम दिने संस्था
+                  </th>
+                  <th className="border border-gray-300 p-2">तालिमको नाम</th>
+                  <th className="border border-gray-300 p-2">
+                    तालिम सकिएको वर्ष (बि.सं.)
+                  </th>
+                  <th className="border border-gray-300 p-2">श्रेणी</th>
+                </tr>
+              </thead>
+              {Array.isArray(candidateDatas) &&
+                candidateDatas.map(
+                  (candidateData, index) =>
+                    candidateData &&
+                    Array.isArray(candidateData.candidate_training) &&
+                    candidateData.candidate_training.length > 0 && (
+                      <tbody key={index}>
+                        {candidateData.candidate_training.map(
+                          (training, trainingIndex) => (
+                            <React.Fragment key={`training-${trainingIndex}`}>
+                              {/* Row for Grade Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input type="checkbox" />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Grade
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.grade_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.grade_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.grade_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.grade_detail?.published_date}
+                                </td>
+                              </tr>
+                              {/* Row for Division Detail */}
+                              <tr>
+                                <td className="border border-gray-300 p-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={details.training_id.includes(
+                                      training.grade_detail?.id
+                                    )}
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        training.grade_detail?.id,
+                                        "training_id"
+                                      )
+                                    }
+                                  />
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  Division
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.division_detail?.code}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.division_detail?.title}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.division_detail?.title_np}
+                                </td>
+                                <td className="border border-gray-300 p-2">
+                                  {training.division_detail?.published_date}
+                                </td>
+                              </tr>
+                            </React.Fragment>
+                          )
+                        )}
+                      </tbody>
+                    )
+                )}
+            </table>
+          </div>
+
+          {/* Documents */}
+          <div className="bg-white p-6 shadow rounded-lg border border-gray-200">
+            <h2 className="text-lg font-bold mb-4">Submitted Documents</h2>
+            <table className="w-full border-collapse border border-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="border border-gray-300 p-2">क्रम सं</th>
+                  <th className="border border-gray-300 p-2">कागजात</th>
+                  <th className="border border-gray-300 p-2">
+                    कागजातको प्रकार
+                  </th>
+                  <th className="border border-gray-300 p-2">कागजातको नाम</th>
+                  <th className="border border-gray-300 p-2">कागजातको साइज</th>
+                </tr>
+              </thead>
+              {Array.isArray(candidateDatas) &&
+                candidateDatas.map(
+                  (candidateData, index) =>
+                    candidateData &&
+                    Array.isArray(candidateData.candidate_document) &&
+                    candidateData.candidate_document.length > 0 && (
+                      <tbody key={index}>
+                        {candidateData.candidate_document.map(
+                          (doc, docIndex) => (
+                            <tr key={docIndex}>
+                              <td className="border border-gray-300 p-2">
+                                <input
+                                  type="checkbox"
+                                  checked={details.document_id.includes(doc.id)}
+                                  onChange={() =>
+                                    handleCheckboxChange(doc.id, "document_id")
+                                  }
+                                />
+                              </td>
+                              <td className="border border-gray-300 p-2">
+                                <img
+                                  src={NEXT_PUBLIC_MEDIA_URL + doc.file_path}
+                                  alt="Nepal Logo"
+                                  className="w-10 h-10 object-contain"
+                                />
+                              </td>
+                              <td className="border border-gray-300 p-2">
+                                {doc.file_name}
+                              </td>
+                              <td className="border border-gray-300 p-2">
+                                {doc.file_path}
+                              </td>
+                              <td className="border border-gray-300 p-2">
+                                {doc.document_type}
+                              </td>
+                              <td className="border border-gray-300 p-2">
+                                {(doc.file_size / 1024).toFixed(2)} KB
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    )
+                )}
+            </table>
+          </div>
+          <Voucher />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ApplicationStatus;

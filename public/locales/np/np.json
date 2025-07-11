@@ -1,0 +1,56 @@
+{
+    "company": {
+      "name": "शिक्षक सेवा आयोग",
+      "address": "सानोठीमी, भक्तपुर, नेपाल"
+    },
+
+    "personal_detail": "व्यक्तिगत विवरण",
+    "full_name_nepali": "नेपालीमा पूरा नाम",
+    "full_name_english": "अंग्रेजीमा पूरा नाम",
+
+    "job_posts": "रोजगारीका पोस्टहरू",
+    "application_full": "पूर्ण आवेदन",
+    "application_report": "आवेदन प्रतिवेदन",
+    "outgoing_report": "बहिर्गमन प्रतिवेदन",
+    "incoming_report": "आगमन प्रतिवेदन",
+
+    "settings": "सेटिङहरू",
+    "exam_fees": "परीक्षा शुल्क",
+    "bank_accounts": "बैंक खाता",
+    "subjects": "विषयहरू",
+    "document_types": "कागजात प्रकारहरू",
+    "genders": "लिङ्गहरू",
+    "inclusion_groups": "समावेशी समूहहरू",
+    "education_levels": "शैक्षिक स्तरहरू",
+    "education_grades": "शैक्षिक ग्रेडहरू",
+    "education_divisions": "शैक्षिक डिभिजनहरू",
+    "education_institutes": "शैक्षिक संस्था",
+    "training_names": "तालिम नामहरू",
+    "training_institutes": "तालिम संस्था",
+    "provinces": "प्रदेशहरू",
+    "districts": "जिल्लाहरू",
+    "local_gov_bodies": "स्थानीय सरकार निकायहरू",
+
+    "access_rights": "प्रवेश अधिकारहरू",
+    "users": "प्रयोगकर्ताहरू",
+    "user_posts": "प्रयोगकर्ता पोस्टहरू",
+    "roles": "भूमिकाहरू",
+    "profile": "प्रोफाइल",
+    
+    "id": "पहिचान",
+    "title": "शीर्षक",
+    "rank": "पद",
+    "is_published": "प्रकाशित छ",
+    "actions": "कार्यहरू",
+    "requires_training": "प्रशिक्षण आवश्यक छ",
+    "training": "प्रशिक्षण",
+    "published_date": "प्रकाशित मिति",
+    "account_number": "खाता नम्बर",
+    "name": "नाम",
+    "email": "इमेल",
+    "position": "पद",
+    "salary": "तलब",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय",
+    "add_new": "नयाँ थप्नुहोस्"
+}
