@@ -20,7 +20,7 @@ export const jobPostsRoutes = [
 
 export const settingsRoutes = [
   { name: "Notice", icon: FaCogs, link: "/admin/notice/list" },
-  { name: "Admission", icon: FaCogs, link: "/admin/ecozone/list" },
+  { name: "Admission", icon: FaCogs, link: "/admin/admission/list" },
   { name: "Users", icon: FaCogs, link: "/admin/season/list" }
 
 ];

@@ -72,7 +72,7 @@ export default function getColumns(showModal) {
 
   const noticeColumns = [
     { key: "id", title: "ID" },
-    { key: "title", title: "Title (EN)" },
+    { key: "title", title: "Title" },
 
     {
       key: "description",
@@ -93,7 +93,6 @@ export default function getColumns(showModal) {
   ];
 
   return {
-      district: [...baseColumns, statusColumn],
       ecozone: [...baseColumns, statusColumn],
      commodity_category: [
           { key: "title_en", title: "Title (EN)" },
@@ -135,7 +134,68 @@ export default function getColumns(showModal) {
     notice: noticeColumns,
 
 
+    admission: [
+  { key: "id", title: "ID" },
+  { key: "title", title: "Title" },
+  { key: "shortSubtext", title: "Short Subtext" },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "programsOffered",
+    title: "Programs Offered",
+    render: (val) => {
+      try {
+        const programs = JSON.parse(val);
+        return (
+          <div className="flex flex-col text-sm">
+            {programs.grades?.length && (
+              <div><strong>Grades:</strong> {programs.grades.join(", ")}</div>
+            )}
+            {programs.mediums?.length && (
+              <div><strong>Mediums:</strong> {programs.mediums.join(", ")}</div>
+            )}
+            {programs.curriculum && (
+              <div><strong>Curriculum:</strong> {programs.curriculum}</div>
+            )}
+            {programs.special?.length && (
+              <div><strong>Special:</strong> {programs.special.join(", ")}</div>
+            )}
+          </div>
+        );
+      } catch (e) {
+        return "—";
+      }
+    },
+  },
+  {
+    key: "image",
+    title: "Image",
+    render: (filePath, row) =>
+      renderImage(filePath, () => showModal(filePath, row)),
+  },
+  { key: "eligibilityCriteria", title: "Eligibility" },
+  { key: "importantNotices", title: "Important Notes" },
+  {
+    key: "admissionOpenDate",
+    title: "Open Date",
+    render: (val) => val || "—",
+  },
+  {
+    key: "entranceTestDate",
+    title: "Test Date",
+    render: (val) => val || "—",
+  },
+  {
+    key: "orientationDay",
+    title: "Orientation Day",
+    render: (val) => val || "—",
+  },
+  statusColumn,
+],
+
     };
-
-
 }

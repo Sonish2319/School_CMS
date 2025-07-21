@@ -44,6 +44,8 @@ export const handleEditPath = (router, variable, id) => {
   router.push(`/admin/${variable}/form?id=${id}`);
 };
 
+
+
 export function useApiRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

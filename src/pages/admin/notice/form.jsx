@@ -1,104 +1,131 @@
-// pages/notice/form.jsx
-
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Form from "@/components/form/form";
 import { useApiRequest } from "@/utils/helper";
-import { useFetchData } from "@/store/hooks/useFetchData";
+import { useRouter } from "next/router";
+import { useFetchData } from "../../../store/hooks/useFetchData";
 
 export default function NoticeForm({ isPopup = false, onClose, id, isAdding, refetch }) {
+  const [error, setError] = useState("");
+  const [initialValues, setInitialValues] = useState(null);
   const router = useRouter();
   const isEditMode = !!id;
 
-  const [initialValues, setInitialValues] = useState(null);
-  const [error, setError] = useState("");
+  const {
+    sendRequest,
+    loading: submitLoading,
+    error: submitError,
+  } = useApiRequest();
 
-  const { sendRequest, loading: submitLoading, error: submitError } = useApiRequest();
-  const { data, loading } = useFetchData(isEditMode ? `notices/${id}` : null, { method: "GET" });
+  const { data, error: fetchError, loading } = useFetchData(
+    isEditMode ? `notices/${id}/` : null
+  );
 
   useEffect(() => {
-    if (data && isEditMode) {
+    if (data) {
       setInitialValues({
         title: data.title || "",
         description: data.description || "",
-        file: data.file || null,
         status: data.status ? "active" : "inactive",
-      });
-    } else if (!isEditMode) {
-      setInitialValues({
-        title: "",
-        description: "",
-        file: null,
-        status: "active",
+        image: data.file || "",
       });
     }
-  }, [data, isEditMode]);
+  }, [data]);
 
-  useEffect(() => {
-    if (submitError) {
-      setError("Failed to submit notice.");
-    }
-  }, [submitError]);
+  // const handleSubmit = async (formData) => {
+
+  //   console.log("Form Data:", formData);
+  //   const url = isEditMode ? `notices/${id}` : "notices";
+  //   const method = isEditMode ? "PUT" : "POST";
+
+  //   const payload = new FormData();
+  //   payload.append("title", formData.title || "");
+  //   payload.append("description", formData.description || "");
+  //   payload.append("status", formData.status === "active" || formData.status === 1 ? "true" : "false");
+
+  //   if (formData.image instanceof File) {
+  //     payload.append("file", formData.file);
+  //   }
+
+  //   if (payload instanceof FormData) {
+  //     for (let [key, value] of payload.entries()) {
+  //       console.log("FormData field:", key, value);
+  //     }
+  //   } else {
+  //     console.log(payload);
+  //   }
+    
+
+  //   try {
+  //     await sendRequest(url, method, payload);
+  //     refetch?.();
+  //     onClose?.();
+  //   } catch (err) {
+  //     setError(submitError || "Failed to save notice.");
+  //   }
+  // };
 
   const handleSubmit = async (formData) => {
-    console.log("🚀 Submitted formData:", formData);
-  
     const url = isEditMode ? `notices/${id}` : "notices";
     const method = isEditMode ? "PUT" : "POST";
   
-    // Check if already FormData (from Form component)
-    const isFormData = formData instanceof FormData;
+    if (formData instanceof FormData) {
+      // formData already FormData, adjust status field
+      // Remove old status and append new integer status
+      formData.delete("status");
+      // Read the old status string from initialValues or fallback
+      let statusStr = initialValues?.status || "inactive"; 
+      const statusInt = statusStr === "active" ? 1 : 0;
+      formData.append("status", statusInt);
   
-    const payload = isFormData ? formData : new FormData();
-  
-    // If not FormData, manually append fields
-    if (!isFormData) {
-      payload.append("title", formData.title);
-      payload.append("description", formData.description);
-      payload.append("status", formData.status === "active");
-  
-      if (formData.file instanceof File) {
-        payload.append("file", formData.file);
+      // Debug log
+      for (let [key, value] of formData.entries()) {
+        console.log("FormData field:", key, value);
       }
-    }
   
-    // Optional: debug the payload
-    for (let pair of payload.entries()) {
-      console.log("📦 FormData field:", pair[0], pair[1]);
-    }
-  
-    try {
-      await sendRequest(url, method, payload);
-
-  
-      if (isPopup) {
-        onClose?.();
+      try {
+        await sendRequest(url, method, formData);
         refetch?.();
-      } else {
-        router.push("/admin/notice/list");
+        onClose?.();
+      } catch (err) {
+        setError(submitError || "Failed to save notice.");
       }
-    } catch (err) {
-      setError("Failed to save notice.");
+    } else {
+      // formData is plain object - no files present
+      const payload = new FormData();
+      payload.append("title", formData.title || "");
+      payload.append("description", formData.description || "");
+      payload.append("status", formData.status === "active" ? 1 : 0);
+  
+      // No file field in plain object formData, so no file append
+  
+      // Debug log
+      for (let [key, value] of payload.entries()) {
+        console.log("FormData field:", key, value);
+      }
+  
+      try {
+        await sendRequest(url, method, payload);
+        refetch?.();
+        onClose?.();
+      } catch (err) {
+        setError(submitError || "Failed to save notice.");
+      }
     }
   };
   
 
+  
   const fields = [
-    { label: "Title (English)", name: "title", type: "text" },
+    { label: "Title", name: "title", type: "text" },
     { label: "Description", name: "description", type: "textarea" },
-    {
-      label: "Attachment (optional)",
-      name: "file",
-      type: "file",
-      accept: ".pdf,.jpg,.jpeg,.png,.doc,.docx",
-    },
+    { label: "File", name: "file", type: "file" },
     {
       label: "Status",
       name: "status",
       type: "option",
       options: [
-        { value: 1, label: "Active" },  // Use 1 for active
-      { value: 0, label: "Inactive" } // Use 0 for inactive
+        { value: "active", label: "Active" },
+        { value: "inactive", label: "Inactive" },
       ],
     },
   ];
@@ -111,15 +138,13 @@ export default function NoticeForm({ isPopup = false, onClose, id, isAdding, ref
         </h2>
       </div>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-      {loading && isEditMode ? (
+      {loading ? (
         <p className="text-center">Loading...</p>
       ) : (
         <Form
           fields={fields}
           onSubmit={handleSubmit}
           initialValues={initialValues}
-          isPopup={isPopup}
-          submitText={isEditMode ? "Update" : "Create"}
           loading={submitLoading}
         />
       )}
