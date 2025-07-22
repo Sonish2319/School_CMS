@@ -57,7 +57,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch(`${BASE_URL}user/signup/`, {
+      const response = await fetch(`${BASE_URL}auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

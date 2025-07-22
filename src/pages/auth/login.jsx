@@ -209,10 +209,10 @@ export default function Login() {
   const handleLogin = async (formData) => {
     const { email, password } = formData;
 
-    if (captchaInput.trim() !== generatedCaptcha.trim()) {
-      setError("Invalid CAPTCHA. Try again.");
-      return;
-    }
+    // if (captchaInput.trim() !== generatedCaptcha.trim()) {
+    //   setError("Invalid CAPTCHA. Try again.");
+    //   return;
+    // }
 
     setLoading(true);
     setError("");
@@ -222,7 +222,7 @@ export default function Login() {
         throw new Error("Internal server error. Please try again later.");
       }
 
-      const url = `${BASE_URL}user/login/`;
+      const url = `${BASE_URL}auth/login`;
 
       const response = await fetch(url, {
         method: "POST",
@@ -238,11 +238,11 @@ export default function Login() {
         throw new Error(data.message || "Login failed");
       }
 
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("access", data.accessToken);
+      localStorage.setItem("refresh", data.refreshToken);
       localStorage.setItem("role", data.role);
       localStorage.setItem("email", data.email);
-      localStorage.setItem("full_name", data.full_name);
+      localStorage.setItem("full_name", data.name);
 
       if (["admin", "entryuser"].includes(data.role)) {
         router.push("/admin/dashboard");

@@ -1,4 +1,6 @@
 import { FaCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+
 
 const NEXT_PUBLIC_MEDIA_URL = process.env.NEXT_PUBLIC_MEDIA_URL;
 
@@ -196,6 +198,64 @@ export default function getColumns(showModal) {
   },
   statusColumn,
 ],
+
+user: [
+      {
+        key: "id",
+        title: "ID",
+        width: 70
+      },
+      {
+        key: "name",
+        title: "Username",
+        width: 150
+      },
+      // {
+      //   key: "is_active",
+      //   title: "Status",
+      //   render: (value) => (
+      //     <span
+      //       className={`px-2 py-1 rounded-full text-[12px] font-semibold ${value
+      //         ? "text-green-700 bg-green-100 border border-green-700"
+      //         : "text-red-700 bg-red-100 border border-red-700"
+      //         }`}
+      //     >
+      //       {value ? "Active" : "Inactive"}
+      //     </span>
+      //   ),
+      //   width: 100
+      // },
+
+      {
+        key: "is_superuser",
+        title: "Superuser",
+        width: 100,
+        render: (value) => (
+          <span
+            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold ${value ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+              }`}
+          >
+            {value ? <FaCheckCircle /> : <FaTimesCircle />}
+            {value ? "Yes" : "No"}
+          </span>
+        ),
+      },
+
+      {
+        key: "is_staff",
+        title: "Staff",
+        width: 100,
+        render: (value) => (
+          <span
+            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold ${value ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+              }`}
+          >
+            {value ? <FaCheckCircle /> : <FaTimesCircle />}
+            {value ? "Yes" : "No"}
+          </span>
+        ),
+      },
+    ],
 
     };
 }

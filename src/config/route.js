@@ -39,6 +39,10 @@ const adminPaths = [
 
   "/admission/list",
   "/admission/form",
+
+  "/user/list",
+  "/user/form",
+  "/user/app/[id]",
   
   "/ecozone/list",
   "/ecozone/form",
