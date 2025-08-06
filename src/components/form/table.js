@@ -23,6 +23,17 @@ export default function Table({
     setDropdownPosition({ top: rect.bottom + window.scrollY, left: rect.left + window.scrollX });
   };
 
+  const getCellValue = (row, column) => {
+    const key = column.dataIndex || column.key;
+  
+    if (key.includes(".")) {
+      return key.split(".").reduce((acc, part) => acc?.[part], row);
+    }
+  
+    return row?.[key];
+  };
+  
+
   const Dropdown = ({ row }) =>
     createPortal(
       <div
@@ -104,7 +115,7 @@ export default function Table({
                         colIndex === 0 ? "w-[190px]" : "w-[120px]"
                       }`}
                     >
-                      {column.render
+                      {/* {column.render
                         ? column.render(
                           row[
                           locale === "np" && column.key === "title"
@@ -117,7 +128,12 @@ export default function Table({
                         locale === "np" && column.key === "title"
                           ? "title_np"
                           : column.key
-                        ]}
+                        ]} */}
+                        {column.render
+  ? column.render(getCellValue(row, column), row)
+  : getCellValue(row, column)}
+
+
                     </td>
                   ))}
                   {(onEdit || onDelete || customActions.length > 0) && (

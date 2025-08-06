@@ -31,39 +31,6 @@ export default function NoticeForm({ isPopup = false, onClose, id, isAdding, ref
     }
   }, [data]);
 
-  // const handleSubmit = async (formData) => {
-
-  //   console.log("Form Data:", formData);
-  //   const url = isEditMode ? `notices/${id}` : "notices";
-  //   const method = isEditMode ? "PUT" : "POST";
-
-  //   const payload = new FormData();
-  //   payload.append("title", formData.title || "");
-  //   payload.append("description", formData.description || "");
-  //   payload.append("status", formData.status === "active" || formData.status === 1 ? "true" : "false");
-
-  //   if (formData.image instanceof File) {
-  //     payload.append("file", formData.file);
-  //   }
-
-  //   if (payload instanceof FormData) {
-  //     for (let [key, value] of payload.entries()) {
-  //       console.log("FormData field:", key, value);
-  //     }
-  //   } else {
-  //     console.log(payload);
-  //   }
-    
-
-  //   try {
-  //     await sendRequest(url, method, payload);
-  //     refetch?.();
-  //     onClose?.();
-  //   } catch (err) {
-  //     setError(submitError || "Failed to save notice.");
-  //   }
-  // };
-
   const handleSubmit = async (formData) => {
     const url = isEditMode ? `notices/${id}` : "notices";
     const method = isEditMode ? "PUT" : "POST";

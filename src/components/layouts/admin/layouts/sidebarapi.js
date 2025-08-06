@@ -13,7 +13,9 @@ import {
 } from "react-icons/fa";
 
 export const jobPostsRoutes = [
-  { name: "Gallery", icon: FaBriefcase, link: "/admin/jobpost/list" },
+  { name: "Gallery", icon: FaBriefcase, link: "/admin/gallery/list" },
+  { name: "Slider", icon: FaBriefcase, link: "/admin/slider/list" },
+  { name: "About Us", icon: FaBriefcase, link: "/admin/aboutus/list" },
   { name: "Feedback", icon: FaBriefcase, link: "/admin/commodity_category/list" },
   { name: "Contact", icon: FaBriefcase, link: "/admin/commodity/list" }
 ];

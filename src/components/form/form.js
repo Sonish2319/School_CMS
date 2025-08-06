@@ -20,12 +20,42 @@ const Form = ({ fields, onSubmit, initialValues = {} }) => {
     }
   }, [fields, initialValues]);
 
+  // const handleChange = (e) => {
+  //   const { name, type, value, files, checked } = e.target;
+
+  //   if (type === "file") {
+  //     const file = files[0];
+  //     if (file) {
+  //       setFormData((prev) => ({
+  //         ...prev,
+  //         [name]: file,
+  //       }));
+
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         setImagePreview((prev) => ({
+  //           ...prev,
+  //           [name]: reader.result,
+  //         }));
+  //       };
+  //       reader.readAsDataURL(file);
+  //     }
+  //   } else {
+  //     const newValue = type === "checkbox" ? checked : value;
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       [name]: newValue,
+  //     }));
+  //   }
+  // };
+
   const handleChange = (e) => {
-    const { name, type, value, files, checked } = e.target;
+    const { name, type, value, files, checked, multiple } = e.target;
 
     if (type === "file") {
-      const file = files[0];
-      if (file) {
+      if (files.length === 1) {
+        // single file upload (old behavior)
+        const file = files[0];
         setFormData((prev) => ({
           ...prev,
           [name]: file,
@@ -35,10 +65,41 @@ const Form = ({ fields, onSubmit, initialValues = {} }) => {
         reader.onload = () => {
           setImagePreview((prev) => ({
             ...prev,
-            [name]: reader.result,
+            [name]: [reader.result], // store array for consistency
           }));
         };
         reader.readAsDataURL(file);
+      } else if (files.length > 1) {
+        // multiple files upload
+        const filesArray = Array.from(files);
+        setFormData((prev) => ({
+          ...prev,
+          [name]: filesArray,
+        }));
+
+        // generate previews for all files
+        filesArray.forEach((file, idx) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            setImagePreview((prev) => {
+              const prevPreviews = prev[name] || [];
+              const newPreviews = [...prevPreviews];
+              newPreviews[idx] = reader.result;
+              return { ...prev, [name]: newPreviews };
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      } else {
+        // no files
+        setFormData((prev) => ({
+          ...prev,
+          [name]: null,
+        }));
+        setImagePreview((prev) => ({
+          ...prev,
+          [name]: [],
+        }));
       }
     } else {
       const newValue = type === "checkbox" ? checked : value;
@@ -48,6 +109,8 @@ const Form = ({ fields, onSubmit, initialValues = {} }) => {
       }));
     }
   };
+
+
 
   const handleCustomFieldChange = (name, value) => {
     setFormData((prev) => ({
@@ -99,7 +162,7 @@ const Form = ({ fields, onSubmit, initialValues = {} }) => {
       encType="multipart/form-data"
     >
       {fields.map((field) => {
-        const { label, name, type, options, render } = field;
+        const { label, name, type, options, render, multiple } = field;
 
         return (
           <div key={name} className="mb-4 flex flex-col gap-[8px]">
@@ -119,14 +182,28 @@ const Form = ({ fields, onSubmit, initialValues = {} }) => {
                   name={name}
                   accept="image/*"
                   onChange={handleChange}
+                  multiple={multiple}
                   className="w-full p-2 border border-gray-300 rounded-[2px] focus:outline-none focus:bg-gray-100"
                 />
-                {imagePreview[name] && (
+                {/* {imagePreview[name] && (
                   <img
                     src={imagePreview[name]}
                     alt={`${name} preview`}
                     className="mt-2 max-h-40 rounded-lg shadow-md"
                   />
+                )}
+              </> */}
+              {imagePreview[name]?.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {imagePreview[name].map((src, i) => (
+                      <img
+                        key={i}
+                        src={src}
+                        alt={`${name} preview ${i + 1}`}
+                        className="max-h-40 rounded-lg shadow-md"
+                      />
+                    ))}
+                  </div>
                 )}
               </>
             ) : type === "checkbox" ? (

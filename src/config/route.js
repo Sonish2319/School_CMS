@@ -37,6 +37,15 @@ const adminPaths = [
   "/notice/list",
   "/notice/form",
 
+  "/slider/list",
+  "/slider/form",
+
+  "/aboutus/list",
+  "/aboutus/form",
+
+  "/gallery/list",
+  "/gallery/form",
+
   "/admission/list",
   "/admission/form",
 
