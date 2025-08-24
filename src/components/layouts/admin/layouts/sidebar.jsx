@@ -80,32 +80,100 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     router.push("/auth/login");
   };
 
+  // const renderNavSection = (title, routes) => (
+  //   <>
+  //     {isOpen && (
+  //       <li className=" user-select-none uppercase text-sm mb-1 text-gray-400 font-semibold">
+  //         {title}
+  //       </li>
+  //     )}
+  //     {routes.map(({ name, icon: Icon, link }) => {
+  //       const isActive = pathname === link;
+  //       return (
+  //         <li key={name} className="mb-3 flex items-center group">
+  //           <Link
+  //             href={link}
+  //             className={`block w-full p-2 rounded flex items-center transition-colors 
+  //               ${isActive ? "bg-[#5B73E8] text-white" : "hover:bg-[#5B73E8] hover:text-white"}`}
+  //           >
+  //             <Icon size={20} className="mr-2" />
+  //             <span className={`${isOpen ? "block" : "hidden"} ml-2`}>
+  //               {t(name)}
+  //             </span>
+  //           </Link>
+  //         </li>
+  //       );
+  //     })}
+  //   </>
+  // );
+
   const renderNavSection = (title, routes) => (
     <>
       {isOpen && (
-        <li className=" user-select-none uppercase text-sm mb-1 text-gray-400 font-semibold">
+        <li className="user-select-none uppercase text-sm mb-1 text-gray-400 font-semibold">
           {title}
         </li>
       )}
-      {routes.map(({ name, icon: Icon, link }) => {
+      {routes.map(({ name, icon: Icon, link, children }) => {
         const isActive = pathname === link;
+        const hasChildren = Array.isArray(children) && children.length > 0;
+  
         return (
-          <li key={name} className="mb-3 flex items-center group">
-            <Link
-              href={link}
-              className={`block w-full p-2 rounded flex items-center transition-colors 
-                ${isActive ? "bg-[#5B73E8] text-white" : "hover:bg-[#5B73E8] hover:text-white"}`}
-            >
-              <Icon size={20} className="mr-2" />
-              <span className={`${isOpen ? "block" : "hidden"} ml-2`}>
-                {t(name)}
-              </span>
-            </Link>
+          <li key={name} className="mb-2">
+            {hasChildren ? (
+              <>
+                {/* Parent Item */}
+                <div
+                  className={`flex items-center px-2 py-2 rounded cursor-pointer 
+                    ${isOpen ? "" : "justify-center"}
+                    ${children.some(child => pathname === child.link)
+                      ? "bg-[#5B73E8] text-white"
+                      : "hover:bg-[#5B73E8] hover:text-white"}
+                  `}
+                >
+                  <Icon size={20} className="mr-2" />
+                  {isOpen && <span>{t(name)}</span>}
+                </div>
+  
+                {/* Child Items */}
+                <ul className={`${isOpen ? "ml-6 mt-1" : "hidden"}`}>
+                  {children.map(({ name: childName, icon: ChildIcon, link: childLink }) => {
+                    const isChildActive = pathname === childLink;
+                    return (
+                      <li key={childName} className="mb-1">
+                        <Link
+                          href={childLink}
+                          className={`flex items-center px-2 py-1 rounded text-sm
+                            ${isChildActive
+                              ? "bg-[#5B73E8] text-white"
+                              : "hover:bg-[#5B73E8] hover:text-white"}`}
+                        >
+                          <ChildIcon size={16} className="mr-2" />
+                          {t(childName)}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <Link
+                href={link}
+                className={`block p-2 rounded flex items-center transition-colors 
+                  ${isActive ? "bg-[#5B73E8] text-white" : "hover:bg-[#5B73E8] hover:text-white"}`}
+              >
+                <Icon size={20} className="mr-2" />
+                <span className={`${isOpen ? "block" : "hidden"} ml-2`}>
+                  {t(name)}
+                </span>
+              </Link>
+            )}
           </li>
         );
       })}
     </>
   );
+  
 
   return (
     <div className="border-r-[1px] border-gray-300">

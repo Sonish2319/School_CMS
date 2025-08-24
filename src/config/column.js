@@ -368,6 +368,20 @@ export default function getColumns(showModal) {
   statusColumn,
 ],
 
+abouthero : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "background_image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
 user: [
       {
         key: "id",
