@@ -13,7 +13,7 @@ export default function StatisticForm({ mode = "add" }) {
   const [error, setError] = useState("");
 
   const { data, error: fetchError, loading } = useFetchData(
-    isEditMode ? `aboutus/statistics/${id}` : null
+    isEditMode ? `aboutus/newsletter/${id}` : null
   );
 
   const { sendRequest, loading: submitLoading, error: submitError } = useApiRequest();
@@ -21,8 +21,8 @@ export default function StatisticForm({ mode = "add" }) {
   useEffect(() => {
     if (isEditMode && data) {
       setInitialValues({
-        label: data.label || "",
-        value: data.value || "",
+        title: data.title || "",
+        description: data.description || "",
       });
     }
   }, [data, isEditMode]);
@@ -36,20 +36,20 @@ export default function StatisticForm({ mode = "add" }) {
   const handleSubmit = async (formData) => {
     const method = isEditMode ? "PUT" : "POST";
     const url = isEditMode
-      ? `aboutus/statistics/${id}`
-      : `aboutus/statistics`;
+      ? `aboutus/newsletter/${id}`
+      : `aboutus/newsletter`;
 
     try {
       await sendRequest(url, method, formData);
-      router.push("/admin/aboutus/statistics/list");
+      router.push("/admin/aboutus/newsletter/list");
     } catch (err) {
       setError(submitError || "Failed to save statistic.");
     }
   };
 
   const formFields = [
-    { label: "Label", name: "label", type: "text" },
-    { label: "Value", name: "value", type: "text" },
+    { label: "Title", name: "title", type: "text" },
+    { label: "Description", name: "description", type: "text" },
   ];
 
   return (

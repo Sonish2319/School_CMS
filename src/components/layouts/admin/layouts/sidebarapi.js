@@ -91,7 +91,9 @@ export const jobPostsRoutes = [
       { name: "History", icon: FaHistory, link: "/admin/aboutus/history/list" },
       { name: "Statistics", icon: FaChartBar, link: "/admin/aboutus/statistics/list" },
       { name: "Leadership", icon: FaUsers, link: "/admin/aboutus/leadership/list" },
-      { name: "CTA & Newsletter", icon: FaPaperPlane, link: "/admin/aboutus/cta-newsletter/list" }
+      { name: "Newsletter", icon: FaPaperPlane, link: "/admin/aboutus/newsletter/list" },
+      { name: "CTA", icon: FaPaperPlane, link: "/admin/aboutus/cta/list" }
+
     ]
   },
 

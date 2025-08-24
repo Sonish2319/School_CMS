@@ -5,8 +5,6 @@ import Form from "@/components/form/form";
 import { useFetchData } from "@/store/hooks/useFetchData";
 import { useApiRequest } from "@/utils/helper";
 
-
-
 export default function HeroForm({ mode = "add" }) {
   const router = useRouter();
   const { id } = router.query;

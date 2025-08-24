@@ -8,6 +8,8 @@ import { fetchLocalStorage } from '../utils/helper';
 import { LanguageProvider } from '../context/LanguageContext';
 import { SearchContextProvider } from '../context/SearchContext';
 import { authRoutes, adminRoutes } from '@/config/route.js';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function App({ Component, pageProps }) {
   const router = useRouter();

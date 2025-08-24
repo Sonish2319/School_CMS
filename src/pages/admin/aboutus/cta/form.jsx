@@ -4,7 +4,7 @@ import Form from "@/components/form/form";
 import { useFetchData } from "@/store/hooks/useFetchData";
 import { useApiRequest } from "@/utils/helper";
 
-export default function StatisticForm({ mode = "add" }) {
+export default function CTAForm({ mode = "add" }) {
   const router = useRouter();
   const { id } = router.query;
   const isEditMode = !!id;
@@ -13,7 +13,7 @@ export default function StatisticForm({ mode = "add" }) {
   const [error, setError] = useState("");
 
   const { data, error: fetchError, loading } = useFetchData(
-    isEditMode ? `aboutus/statistics/${id}` : null
+    isEditMode ? `aboutus/cta/${id}` : null
   );
 
   const { sendRequest, loading: submitLoading, error: submitError } = useApiRequest();
@@ -21,42 +21,44 @@ export default function StatisticForm({ mode = "add" }) {
   useEffect(() => {
     if (isEditMode && data) {
       setInitialValues({
-        label: data.label || "",
-        value: data.value || "",
+        title: data.title || "",
+        description: data.description || "",
+        button_text: data.button_text || "",
+        link: data.link || "",
       });
     }
   }, [data, isEditMode]);
 
   useEffect(() => {
     if (fetchError) {
-      setError("Failed to fetch statistic.");
+      setError("Failed to fetch CTA data.");
     }
   }, [fetchError]);
 
   const handleSubmit = async (formData) => {
     const method = isEditMode ? "PUT" : "POST";
-    const url = isEditMode
-      ? `aboutus/statistics/${id}`
-      : `aboutus/statistics`;
+    const url = isEditMode ? `aboutus/cta/${id}` : `aboutus/cta`;
 
     try {
       await sendRequest(url, method, formData);
-      router.push("/admin/aboutus/statistics/list");
+      router.push("/admin/aboutus/cta/list");
     } catch (err) {
-      setError(submitError || "Failed to save statistic.");
+      setError(submitError || "Failed to save CTA.");
     }
   };
 
   const formFields = [
-    { label: "Label", name: "label", type: "text" },
-    { label: "Value", name: "value", type: "text" },
+    { label: "Title", name: "title", type: "text" },
+    { label: "Description", name: "description", type: "textarea" },
+    { label: "Button Text", name: "button_text", type: "text" },
+    { label: "Link", name: "link", type: "text" },
   ];
 
   return (
     <div className="flex flex-col gap-[20px]">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 bg-gradient-to-r from-green-500 to-green-700 px-4 py-4 rounded-2xl">
         <h2 className="text-[22px] sm:text-[26px] font-semibold text-white">
-          {isEditMode ? "Edit Statistic" : "Add Statistic"}
+          {isEditMode ? "Edit CTA" : "Add CTA"}
         </h2>
       </div>
 
@@ -67,11 +69,9 @@ export default function StatisticForm({ mode = "add" }) {
       ) : (
         <div className="table-container border border-gray-300">
           <div className="py-6 border-b border-gray-300">
-            <div className="flex gap-[10px] px-3 sm:px-6 ">
+            <div className="flex gap-[10px] px-3 sm:px-6">
               <div className="w-2 h-8 bg-[#28b463] rounded-full"></div>
-              <p className="text-[20px] font-medium text-gray-700">
-                Statistic Form
-              </p>
+              <p className="text-[20px] font-medium text-gray-700">CTA Form</p>
             </div>
           </div>
           <Form

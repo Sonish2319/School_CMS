@@ -9,7 +9,7 @@ import getColumns from "@/config/column";
 
 export default function HeroList() {
   const router = useRouter();
-  const moduleName = "aboutus/statistics";
+  const moduleName = "aboutus/newsletter";
   const columns = getColumns();
 
   const [page, setPage] = useState(1);
@@ -50,7 +50,7 @@ export default function HeroList() {
           </div>
         </div>
         <Table
-          columns={columns.statisticsAbout}
+          columns={columns.newsletterAbout}
         //   data={Array.isArray(data?.results) ? data.results : []}
         data={Array.isArray(data) ? data : []}
           loading={loading}

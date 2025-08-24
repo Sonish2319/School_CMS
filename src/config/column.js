@@ -382,6 +382,156 @@ abouthero : [
     },
   ],
 
+missionVisionHome: [
+  {
+    key: "mission_title",
+    title: "Mission Title",
+    dataIndex: "mission_title",
+  },
+  {
+    key: "mission_description",
+    title: "Mission Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "mission_icon",
+    title: "Mission Icon",
+    render: (val) => val ? <i className={`fa ${val}`} /> : "—",  // Using FontAwesome icon
+  },
+  {
+    key: "vision_title",
+    title: "Vision Title",
+    dataIndex: "vision_title",
+  },
+  {
+    key: "vision_description",
+    title: "Vision Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "vision_icon",
+    title: "Vision Icon",
+    render: (val) => val ? <i className={`fa ${val}`} /> : "—",  // Using FontAwesome icon
+  },
+],
+
+coreValuesHome : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "icon",
+    title: "Icon",
+    render: (iconClass) =>
+      iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+  },
+],
+
+historyTimeline : [
+  {
+    key: "year",
+    title: "Year",
+    dataIndex: "year",
+  },
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+],
+
+statisticsAbout : [
+  {
+    key: "label",
+    title: "Label",
+    dataIndex: "label",
+  },
+  {
+    key: "value",
+    title: "Value",
+    dataIndex: "value",
+  },
+],
+
+leadershipAbout : [
+  {
+    key: "name",
+    title: "Name",
+    dataIndex: "name",
+  },
+  {
+    key: "role",
+    title: "Role",
+    dataIndex: "role",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "image",
+    title: "Image",
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+],
+
+newsletterAbout : [
+{
+    key: "title",
+    title: "Tile",
+    dataIndex: "title",
+},
+{
+  key: "description",
+  title: "Description",
+  render: (val) =>
+    val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+},
+
+],
+
+ctaAbout : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "description",
+    title: "Description",
+    dataIndex: "description",
+  },
+  {
+    key: "button_text",
+    title: "Button Text",
+    dataIndex: "button_text",
+  },
+  {
+    key: "link",
+    title: "Link",
+    dataIndex: "link",
+  },
+],
+
+
 user: [
       {
         key: "id",

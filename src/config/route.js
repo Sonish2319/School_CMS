@@ -141,11 +141,25 @@ const adminPaths = [
   "/aboutus/hero/form",
   
   "/aboutus/mission-vision/list",
+  "/aboutus/mission-vision/form",
+
   "/aboutus/core-values/list",
+  "/aboutus/core-values/form",
+  
   "/aboutus/history/list",
+  "/aboutus/history/form",
+  
   "/aboutus/statistics/list",
+  "/aboutus/statistics/form",
+
   "/aboutus/leadership/list",
-  "/aboutus/cta-newsletter/list",
+  "/aboutus/leadership/form",
+
+  "/aboutus/newsletter/list",
+  "/aboutus/newsletter/form",
+
+  "/aboutus/cta/list",
+  "/aboutus/cta/form",
 
   // ===== Fund =====
   "/fund/hero/list",
