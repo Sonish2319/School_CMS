@@ -679,6 +679,220 @@ admissionhero : [
     },
   ],
 
+  admissionhero : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "subtitle",
+      title: "Subtitle",
+      dataIndex: "subtitle",
+    },
+    {
+      key: "button_text",
+      title: "Button Text",
+      dataIndex: "button_text",
+    },
+    {
+      key: "button_link",
+      title: "Button Link",
+      dataIndex: "button_link",
+    },
+    {
+      key: "background_image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
+ fundCommitment : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "description",
+      title: "Description",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+  ],
+
+ fundAid : [
+    {
+      key: "line1",
+      title: "Line 1",
+      dataIndex: "line1",
+    },
+    {
+      key: "line2",
+      title: "Line 2",
+      dataIndex: "line2",
+    },
+    {
+      key: "step",
+      title: "Step",
+      dataIndex: "step",
+    },
+    {
+      key: "icon",
+      title: "Icon",
+      render: (iconClass) =>
+        iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+    },
+  ],
+
+  ctaFund : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "sub_text",
+    title: "Sub text",
+    dataIndex: "sub_text",
+  },
+  {
+    key: "buttonText",
+    title: "Button Text",
+    dataIndex: "buttonText",
+  },
+  {
+    key: "line1",
+    title: "Line 1",
+    dataIndex: "line1",
+  },
+  {
+    key: "line2",
+    title: "Line 2",
+    dataIndex: "line2",
+  },
+  {
+    key: "line3",
+    title: "Line 3",
+    dataIndex: "line3",
+  },
+  {
+    key: "icon",
+    title: "Icon",
+    render: (iconClass) =>
+      iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+  },
+  {
+    key: "qrimage",
+    title: "Image",
+    // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+],
+
+fundDates : [
+  {
+    key: "date",
+    title: "Date",
+    dataIndex: "date",
+  },
+  {
+    key: "sub_text",
+    title: "Sub Text",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+  },
+],
+
+fundMerit : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "line1",
+    title: "Line 1",
+    dataIndex: "line1",
+  },
+  {
+    key: "line2",
+    title: "Line 2",
+    dataIndex: "line2",
+  },
+  {
+    key: "line3",
+    title: "Line 3",
+    dataIndex: "line3",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+  },
+  {
+    key: "icon",
+    title: "Icon",
+    render: (iconClass) =>
+      iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+  },
+],
+
+fundPayment : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "line1",
+    title: "Line 1",
+    dataIndex: "line1",
+  },
+  {
+    key: "line2",
+    title: "Line 2",
+    dataIndex: "line2",
+  },
+  {
+    key: "line3",
+    title: "Line 3",
+    dataIndex: "line3",
+  },
+  {
+    key: "buttonText",
+    title: "Button Text",
+    dataIndex: "buttonText",
+  },
+  {
+    key: "poular",
+    title: "Popular",
+    dataIndex: "poular",
+  },
+  {
+    key: "icon",
+    title: "Icon",
+    render: (iconClass) =>
+      iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+  },
+],
+
+fundTuition : [
+  {
+    key: "date",
+    title: "Rate",
+    dataIndex: "date",
+  },
+  {
+    key: "type",
+    title: "Type",
+    dataIndex: "type",
+  },
+],
+
+
 
 user: [
       {

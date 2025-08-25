@@ -186,14 +186,31 @@ const adminPaths = [
   
   // ===== Fund =====
   "/fund/hero/list",
+  "/fund/hero/form",
+
   "/fund/commitment/list",
+  "/fund/commitment/form",
+
   "/fund/financialaid/list",
+  "/fund/financialaid/form",
+
   "/fund/faq/list",
+  "/fund/faq/form",
+
   "/fund/cta/list",
+  "/fund/cta/form",
+
   "/fund/importantdates/list",
+  "/fund/importantdates/form",
+
   "/fund/merit/list",
+  "/fund/merit/form",
+
   "/fund/payment/list",
+  "/fund/payment/form",
+
   "/fund/tuition/list",
+  "/fund/tuition/form",
 
   // ===== Contact =====
   "/contact/hero/list",
