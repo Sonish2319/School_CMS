@@ -531,6 +531,154 @@ ctaAbout : [
   },
 ],
 
+admissionhero : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "subtitle",
+      title: "Subtitle",
+      dataIndex: "subtitle",
+    },
+    {
+      key: "button_text",
+      title: "Button Text",
+      dataIndex: "button_text",
+    },
+    {
+      key: "button_link",
+      title: "Button Link",
+      dataIndex: "button_link",
+    },
+    {
+      key: "background_image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
+  admissionApplication : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "description",
+      title: "Description",
+      dataIndex: "description",
+    },
+    {
+      key: "step_number",
+      title: "Step Number",
+      dataIndex: "step_number",
+    },
+    {
+      key: "icon",
+      title: "Icon",
+      render: (iconClass) =>
+        iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+    },
+  ],
+
+  admissionContact : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "contact_type",
+      title: "Contact Type",
+      dataIndex: "contact_type",
+    },
+    {
+      key: "line1",
+      title: "Line 1",
+      dataIndex: "line1",
+    },
+    {
+      key: "line2",
+      title: "Line 2",
+      dataIndex: "line2",
+    },
+    {
+      key: "line3",
+      title: "Line 3",
+      dataIndex: "line3",
+    },
+    {
+      key: "icon",
+      title: "Icon",
+      render: (iconClass) =>
+        iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+    },
+  ],
+
+  admissionDirector : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "director_name",
+      title: "Director Name",
+      dataIndex: "director_name",
+    },
+    {
+      key: "content",
+      title: "Content",
+        render: (val) =>
+          val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+    {
+      key: "director_image",
+      title: "Image",
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
+  admissionFAQ : [
+    {
+      key: "question",
+      title: "Question",
+      dataIndex: "question",
+    },
+    {
+      key: "answer",
+      title: "Answer",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+  ],
+
+  admissionRequirement : [
+    {
+      key: "requirement_text",
+      title: "Requirement",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+  ],
+
+  admissionTimeline : [
+    {
+      key: "date",
+      title: "Date",
+      dataIndex: "date",
+    },
+    {
+      key: "event",
+      title: "Event",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+  ],
+
 
 user: [
       {

@@ -161,6 +161,29 @@ const adminPaths = [
   "/aboutus/cta/list",
   "/aboutus/cta/form",
 
+  // ===== Admission =====
+
+  "/admission/hero/list",
+  "/admission/hero/form",
+  
+  "/admission/applicationProcess/list",
+  "/admission/applicationProcess/form",
+
+  "/admission/contact/list",
+  "/admission/contact/form",
+  
+  "/admission/faq/list",
+  "/admission/faq/form",
+  
+  "/admission/requirement/list",
+  "/admission/requirement/form",
+
+  "/admission/director/list",
+  "/admission/director/form",
+
+  "/admission/timeline/list",
+  "/admission/timeline/form",
+  
   // ===== Fund =====
   "/fund/hero/list",
   "/fund/commitment/list",

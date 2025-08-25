@@ -103,13 +103,11 @@ export const jobPostsRoutes = [
     children: [
       { name: "Hero Section", icon: FaEye, link: "/admin/admission/hero/list" },
       { name: "Application Process", icon: FaStar, link: "/admin/admission/applicationProcess/list" },
-      { name: "Financial Aid", icon: FaBriefcase, link: "/admin/admission/financialAid/list" },
-      { name: "Funding FAQ", icon: FaHistory, link: "/admin/admission/fundingFAQ/list" },
-      { name: "Fund CTA", icon: FaChartBar, link: "/admin/admission/fundCta/list" },
-      { name: "Important Dates", icon: FaUsers, link: "/admin/admission/importantDates/list" },
-      { name: "Merit", icon: FaPaperPlane, link: "/admin/admission/merit/list" },
-      { name: "Payment Plan", icon: FaCogs, link: "/admin/admission/paymentPlan/list" },
-      { name: "Tuition Fees", icon: FaCogs, link: "/admin/admission/tuitionFees/list" }
+      { name: "Contact", icon: FaBriefcase, link: "/admin/admission/contact/list" },
+      { name: "Director", icon: FaHistory, link: "/admin/admission/director/list" },
+      { name: "FAQ", icon: FaChartBar, link: "/admin/admission/faq/list" },
+      { name: "Requirements", icon: FaUsers, link: "/admin/admission/requirement/list" },
+      { name: "TimeLine", icon: FaPaperPlane, link: "/admin/admission/timeline/list" },
     ]
   },
   {
