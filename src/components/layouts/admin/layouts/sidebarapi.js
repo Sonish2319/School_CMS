@@ -152,7 +152,7 @@ export const jobPostsRoutes = [
     children: [
       { name: "Hero Section", icon: FaBullhorn, link: "/admin/gallery/hero/list" },
       { name: "Categories", icon: FaBriefcase, link: "/admin/gallery/category/list" },
-      { name: "Gallery Grid", icon: FaImage, link: "/admin/gallery/grid/list" }
+      { name: "Gallery Grid", icon: FaImage, link: "/admin/gallery/photos/list" }
     ]
   }
 

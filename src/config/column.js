@@ -43,6 +43,44 @@ console.log(`Rendering file: ${filePath} → ${NEXT_PUBLIC_MEDIA_URL}${filePath}
   );
 }
 
+export function renderMultipleImages(value) {
+  if (!value) return "—";
+
+  let images = [];
+  try {
+    images = JSON.parse(value);
+  } catch {
+    return "Invalid Image Format";
+  }
+
+  return (
+    <div className="flex gap-2 flex-wrap">
+      {images.slice(0, 4).map((filePath, i) => {
+        const extension = filePath.split(".").pop().toLowerCase();
+        if (!["jpg", "jpeg", "png", "gif", "webp"].includes(extension)) return null;
+
+        // Make sure there's exactly one slash between env url and file path
+        const cleanedPath = filePath.startsWith("/") ? filePath : `/${filePath}`;
+        const fileUrl = `${NEXT_PUBLIC_MEDIA_URL}${cleanedPath}`;
+
+        return (
+          <img
+            key={i}
+            src={fileUrl}
+            alt={`img-${i}`}
+            className="h-10 w-10 object-cover rounded cursor-pointer"
+            onClick={() => console.log(`Clicked image: ${fileUrl}`)} // you can replace with your showModal
+          />
+        );
+      })}
+      {images.length > 4 && (
+        <span className="text-xs text-gray-500">+{images.length - 4}</span>
+      )}
+    </div>
+  );
+}
+
+
 
 
 export default function getColumns(showModal) {
@@ -892,6 +930,231 @@ fundTuition : [
   },
 ],
 
+contactHero : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "description",
+      title: "Description",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+    {
+      key: "back_image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+  contactTouch : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "line1",
+      title: "Line 1",
+      dataIndex: "line1",
+    },
+    {
+      key: "line2",
+      title: "Line 2",
+      dataIndex: "line2",
+    },
+    {
+      key: "icon",
+      title: "Icon",
+      render: (iconClass) =>
+        iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+    },
+  ],
+  contactDepart : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "description",
+      title: "Description",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+    {
+      key: "phone",
+      title: "Phone",
+      dataIndex: "phone",
+    },
+    {
+      key: "email",
+      title: "Email",
+      dataIndex: "email",
+    },
+  ],
+
+contactVisit : [
+  {
+    key: "sub_text",
+    title: "Sub Text",
+    dataIndex: "sub_text",
+  },
+  {
+    key: "map",
+    title: "Map",
+    dataIndex: "map",
+  },
+  {
+    key: "button_text",
+    title: "Button Text",
+    dataIndex: "button_text",
+  },
+],
+eventHero : [
+    {
+      key: "title",
+      title: "Title",
+      dataIndex: "title",
+    },
+    {
+      key: "sub_text",
+      title: "Sub Text",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—"
+    },
+    {
+      key: "back_image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
+  upcomingEvent: [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "date",
+    title: "Date",
+    dataIndex: "date",
+  },
+  {
+    key: "time",
+    title: "Time",
+    dataIndex: "time",
+  },
+  {
+    key: "location",
+    title: "Location",
+    dataIndex: "location",
+  },
+  {
+    key: "image",
+    title: "Image",
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "category",
+    title: "Category",
+    dataIndex: "category",
+  },
+  {
+    key: "openRegistration",
+    title: "Open Registration",
+    render: (val) => (val ? "Yes" : "No"),
+  },
+  {
+    key: "button_text",
+    title: "Button Text",
+    dataIndex: "button_text",
+  },
+  {
+    key: "icon",
+    title: "Icon",
+    render: (iconClass) =>
+      iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+  },
+],
+eventSemester : [
+  {
+    key: "semester_name",
+    title: "Semester Name",
+    dataIndex: "semester_name",
+  },
+],
+
+calendarEvent: [
+  {
+    key: "semester",
+    title: "Semester",
+    render: (_, row) => row.semester?.semester_name || "—",
+  },
+  {
+    key: "date",
+    title: "Date",
+    dataIndex: "date",
+  },
+  {
+    key: "event",
+    title: "Event",
+    dataIndex: "event",
+  },
+],
+
+categoryImage: [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "isFeatured",
+    title: "Featured",
+    render: (val) => (val ? "Yes" : "No"),
+  },
+],
+
+galleryPhotos: [
+  {
+    key: "feature_title",
+    title: "Feature Title",
+    dataIndex: "feature_title",
+  },
+  {
+    key: "sub_text",
+    title: "Sub Text",
+    dataIndex: "sub_text",
+  },
+  {
+    key: "photos",
+    title: "Photos",
+    render: renderMultipleImages,
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "categoryTitle",
+    title: "Category",
+    dataIndex: "category",
+    render: (category) => category?.title || "—",
+  },
+],
 
 
 user: [
