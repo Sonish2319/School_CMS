@@ -65,12 +65,25 @@ const adminPaths = [
 
   // ===== Home =====
   "/home/hero/list",
+  "/home/hero/form",
+
   "/home/cta/list",
+  "/home/cta/form",
+
   "/home/gallery/list",
+  "/home/gallery/form",
+
   "/home/homeschool/list",
+  "/home/homeschool/form",
+
   "/home/homeStudent/list",
+  "/home/homeStudent/form",
+
   "/home/voice/list",
+  "/home/voice/form",
+
   "/home/image/list",
+  "/home/image/form",
 
   // ===== About Us =====
   "/aboutus/hero/list",

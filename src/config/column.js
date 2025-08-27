@@ -1156,6 +1156,108 @@ galleryPhotos: [
   },
 ],
 
+homeHero : [
+    {
+      key: "feature_title",
+      title: "Feature Title",
+      dataIndex: "feature_title",
+    },
+    {
+      key: "feature_icon",
+      title: "Icon",
+      render: (iconClass) =>
+        iconClass ? <i className={`${iconClass} text-xl`} /> : "—",
+    },
+    {
+      key: "feature_description",
+      title: "Feature Description",
+      render: (val) =>
+        val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+    },
+  ],
+
+heroImage : [
+    {
+      key: "image",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+  
+  homeGallery : [
+    {
+      key: "sub_text",
+      title: "Sub Text",
+      dataIndex: "sub_text",
+    },
+    {
+      key: "images",
+      title: "Image",
+      // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+      render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    },
+  ],
+
+  ctaHome : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "sub_text",
+    title: "Sub Text",
+    dataIndex: "sub_text",
+  },
+],
+
+homeSchool : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "subtitle",
+    title: "Subtitle",
+    dataIndex: "subtitle",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "image",
+    title: "Image",
+    // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+
+],
+
+homeStudent : [
+  {
+    key: "title",
+    title: "Title",
+    dataIndex: "title",
+  },
+  {
+    key: "description",
+    title: "Description",
+    render: (val) =>
+      val && val.length > 80 ? `${val.slice(0, 77)}…` : val || "—",
+  },
+  {
+    key: "image",
+    title: "Image",
+    // render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+
+],
 
 user: [
       {
