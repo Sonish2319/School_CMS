@@ -27,14 +27,13 @@
 import { useTranslations } from "next-intl";
 
 const AddButton = ({ onClick }) => {
-  const t = useTranslations();
 
   return (
     <button
       onClick={onClick}
       className="px-4 py-2 bg-[#5B73E8] text-white text-[14px] rounded hover:bg-blue-700 transition mt-5 mb-5"
     >
-      {t("add_new")}
+      {("add_new")}
     </button>
   );
 };

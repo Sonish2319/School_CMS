@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { useCompanyInfo } from "@/config/general";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,22 +9,12 @@ import {
 } from "./sidebarapi";
 import UserProfile from "@/components/userProfile/UserProfile";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
 export default function Sidebar({ isOpen, setIsOpen }) {
-  const t = useTranslations();
-  const { companyName } = useCompanyInfo();
   const router = useRouter();
   const pathname = usePathname();
   const [userData, setUserData] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-
-  const getBearerToken = () => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("access");
-    }
-    return null;
-  };
+  const [openMenus, setOpenMenus] = useState({}); // Track expanded menus
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,72 +28,17 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [setIsOpen]);
 
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const token = getBearerToken();
-  //       if (!token) throw new Error("Missing access token");
-
-  //       const res = await fetch(`${BASE_URL}personal-info/`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-
-  //       if (!res.ok) {
-  //         const errorText = await res.text();
-  //         throw new Error("Failed to fetch profile: " + errorText);
-  //       }
-
-  //       const result = await res.json();
-  //       if (Array.isArray(result) && result.length > 0) {
-  //         const person = result[0];
-  //         const fullName = `${person.first_name_en || ""} ${person.middle_name_en || ""} ${person.last_name_en || ""}`.trim();
-  //         setUserData({
-  //           email: fullName,
-  //           role: "Admin",
-  //           profileImage: "/default-avatar.png",
-  //         });
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching profile:", err);
-  //     }
-  //   };
-
-  //   fetchProfile();
-  // }, []);
-
   const handleLogout = () => {
     localStorage.removeItem("access");
     router.push("/auth/login");
   };
 
-  // const renderNavSection = (title, routes) => (
-  //   <>
-  //     {isOpen && (
-  //       <li className=" user-select-none uppercase text-sm mb-1 text-gray-400 font-semibold">
-  //         {title}
-  //       </li>
-  //     )}
-  //     {routes.map(({ name, icon: Icon, link }) => {
-  //       const isActive = pathname === link;
-  //       return (
-  //         <li key={name} className="mb-3 flex items-center group">
-  //           <Link
-  //             href={link}
-  //             className={`block w-full p-2 rounded flex items-center transition-colors 
-  //               ${isActive ? "bg-[#5B73E8] text-white" : "hover:bg-[#5B73E8] hover:text-white"}`}
-  //           >
-  //             <Icon size={20} className="mr-2" />
-  //             <span className={`${isOpen ? "block" : "hidden"} ml-2`}>
-  //               {t(name)}
-  //             </span>
-  //           </Link>
-  //         </li>
-  //       );
-  //     })}
-  //   </>
-  // );
+  const toggleMenu = (menuName) => {
+    setOpenMenus((prev) => ({
+      ...prev,
+      [menuName]: !prev[menuName],
+    }));
+  };
 
   const renderNavSection = (title, routes) => (
     <>
@@ -117,54 +50,72 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       {routes.map(({ name, icon: Icon, link, children }) => {
         const isActive = pathname === link;
         const hasChildren = Array.isArray(children) && children.length > 0;
-  
+        const isExpanded = openMenus[name] || false;
+
         return (
           <li key={name} className="mb-2">
             {hasChildren ? (
               <>
                 {/* Parent Item */}
                 <div
-                  className={`flex items-center px-2 py-2 rounded cursor-pointer 
-                    ${isOpen ? "" : "justify-center"}
-                    ${children.some(child => pathname === child.link)
+                  onClick={() => toggleMenu(name)}
+                  className={`flex items-center px-2 py-2 rounded cursor-pointer select-none
+                    ${isOpen ? "justify-between" : "justify-center"}
+                    ${children.some((child) => pathname === child.link)
                       ? "bg-[#5B73E8] text-white"
                       : "hover:bg-[#5B73E8] hover:text-white"}
                   `}
                 >
-                  <Icon size={20} className="mr-2" />
-                  {isOpen && <span>{t(name)}</span>}
+                  <div className="flex items-center">
+                    <Icon size={20} className="mr-2" />
+                    {isOpen && <span>{name}</span>}
+                  </div>
+                  {isOpen && (
+                    <span className="ml-auto transition-transform duration-300">
+                      {isExpanded ? "▾" : "▸"}
+                    </span>
+                  )}
                 </div>
-  
-                {/* Child Items */}
-                <ul className={`${isOpen ? "ml-6 mt-1" : "hidden"}`}>
-                  {children.map(({ name: childName, icon: ChildIcon, link: childLink }) => {
-                    const isChildActive = pathname === childLink;
-                    return (
-                      <li key={childName} className="mb-1">
-                        <Link
-                          href={childLink}
-                          className={`flex items-center px-2 py-1 rounded text-sm
-                            ${isChildActive
-                              ? "bg-[#5B73E8] text-white"
-                              : "hover:bg-[#5B73E8] hover:text-white"}`}
-                        >
-                          <ChildIcon size={16} className="mr-2" />
-                          {t(childName)}
-                        </Link>
-                      </li>
-                    );
-                  })}
+
+                {/* Child Items with animation */}
+                <ul
+                  className={`overflow-hidden transition-all duration-300 ease-in-out
+                    ${isExpanded ? "max-h-[500px] opacity-100 mt-1" : "max-h-0 opacity-0"}
+                    ${isOpen ? "ml-6" : "hidden"}
+                  `}
+                >
+                  {children.map(
+                    ({ name: childName, icon: ChildIcon, link: childLink }) => {
+                      const isChildActive = pathname === childLink;
+                      return (
+                        <li key={childName} className="mb-1">
+                          <Link
+                            href={childLink}
+                            className={`flex items-center px-2 py-1 rounded text-sm
+                              ${isChildActive
+                                ? "bg-[#5B73E8] text-white"
+                                : "hover:bg-[#5B73E8] hover:text-white"}`}
+                          >
+                            <ChildIcon size={16} className="mr-2" />
+                            {childName}
+                          </Link>
+                        </li>
+                      );
+                    }
+                  )}
                 </ul>
               </>
             ) : (
               <Link
                 href={link}
                 className={`block p-2 rounded flex items-center transition-colors 
-                  ${isActive ? "bg-[#5B73E8] text-white" : "hover:bg-[#5B73E8] hover:text-white"}`}
+                  ${isActive
+                    ? "bg-[#5B73E8] text-white"
+                    : "hover:bg-[#5B73E8] hover:text-white"}`}
               >
                 <Icon size={20} className="mr-2" />
                 <span className={`${isOpen ? "block" : "hidden"} ml-2`}>
-                  {t(name)}
+                  {name}
                 </span>
               </Link>
             )}
@@ -173,7 +124,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       })}
     </>
   );
-  
 
   return (
     <div className="border-r-[1px] border-gray-300">
@@ -188,7 +138,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           {/* Company Name */}
           <div className="flex-shrink-0 text-center">
             <h2 className="text-xl text-[#5B73E8] font-bold truncate">
-              {isOpen ? companyName : companyName.charAt(0).toUpperCase()}
+              {isOpen ? "Company" : "C"}
             </h2>
           </div>
 
@@ -198,7 +148,11 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           {/* User Profile */}
           {isOpen && userData && (
             <div className="mb-4">
-              <UserProfile user={userData} onLogout={handleLogout} userType="admin"/>
+              <UserProfile
+                user={userData}
+                onLogout={handleLogout}
+                userType="admin"
+              />
             </div>
           )}
 

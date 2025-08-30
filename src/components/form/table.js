@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+// import { useTranslations, useLocale } from "next-intl";
 import { createPortal } from "react-dom";
 
 export default function Table({
@@ -14,8 +14,8 @@ export default function Table({
 }) {
   const [actionRowId, setActionRowId] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  const t = useTranslations();
-  const locale = useLocale();
+  // const t = useTranslations();
+  // const locale = useLocale();
 
   const handleActionClick = (id, event) => {
     setActionRowId(actionRowId === id ? null : id);
@@ -93,7 +93,7 @@ export default function Table({
               ))}
               {(onEdit || onDelete || customActions.length > 0) && (
                 <th className="py-3 px-5 text-sm font-medium border-b border-gray-300 w-[100px]">
-                  {t("actions")}
+                  {("actions")}
                 </th>
               )}
             </tr>

@@ -12,7 +12,7 @@ import Pagination from "@/components/common/PaginatedList";
 
 export default function List() {
   const router = useRouter();
-  const t = useTranslations();
+  // const t = useTranslations();
   const columns = getColumns();
 
   const testModule = "user";
@@ -47,7 +47,7 @@ console.log('Add button path:', addPath);
     <div className="flex flex-col gap-[20px]">
       <div className="flex flex-col sm:flex-row gap-[12px] sm:gap-0 items-start sm:items-center sm:justify-between bg-white rounded-lg p-3 sm:p-6">
         <div>
-          <h1 className="list-title font-light">{`${t('Users')}`}</h1>
+          <h1 className="list-title font-light">{'Users'}</h1>
           <p className="text-[12px] text-[#99A6AD]" >Access rights</p>
         </div>
 
