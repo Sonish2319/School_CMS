@@ -198,7 +198,15 @@ const adminPaths = [
   "/gallery/category/form",
 
   "/gallery/photos/list",
-  "/gallery/photos/form"
+  "/gallery/photos/form",
+
+  // ======= Book ========
+
+  "/book/subjects/list",
+  "/book/subjects/form",
+
+  "/book/pageBook/list",
+  "/book/pageBook/form",
   
 ];
 

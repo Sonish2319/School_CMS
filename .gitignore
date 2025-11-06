@@ -40,5 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# public files
 
-#test
+/public/locales/*.json
+/public/*

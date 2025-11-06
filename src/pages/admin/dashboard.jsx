@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Dashboard() {
 
-  const t = useTranslations();
+  // const t = useTranslations();
 
   return (
     <div className="container">

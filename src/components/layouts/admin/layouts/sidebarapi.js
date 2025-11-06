@@ -122,7 +122,19 @@ export const jobPostsRoutes = [
       { name: "Categories", icon: FaBriefcase, link: "/admin/gallery/category/list" },
       { name: "Gallery Grid", icon: FaImage, link: "/admin/gallery/photos/list" }
     ]
-  }
+  },
+
+  {
+    name: "Book",
+    icon: FaImage,
+    children: [
+      { name: "Subjects", icon: FaBullhorn, link: "/admin/book/subjects/list" },
+      { name: "Pages", icon: FaBriefcase, link: "/admin/book/pageBook/list" },
+      {name: "Classes", icon: FaBriefcase, link: "/admin/book/classes/list"},
+    ]
+  },
+
+
 
   // { name: "Feedback", icon: FaBriefcase, link: "/admin/commodity_category/list" },
   // { name: "Contact", icon: FaBriefcase, link: "/admin/commodity/list" }

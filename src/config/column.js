@@ -1259,6 +1259,72 @@ homeStudent : [
 
 ],
 
+classes: [
+  {
+    key: "title",
+    title: "Class Name(EN)",
+    dataIndex: "title",
+  },
+  {
+    key: "title_np",
+    title: "Class Name(NP)",
+    dataIndex: "title_np",
+  },
+  {
+    key: "code",
+    title: "Code",
+    dataIndex: "code",
+  },
+],
+
+subjects: [
+  {
+    key: "name",
+    title: "Subject Name",
+    dataIndex: "name",
+  },
+  {
+    key: 'class',
+    title: 'Class Name',
+    render: (_, row) => row.class?.title || "—",
+  },
+  {
+    key: "pages",
+    title: "Pages Count",
+    render: (pages) => (Array.isArray(pages) ? pages.length : 0),
+  },
+  {
+    key: "createdAt",
+    title: "Created At",
+    render: (val) => (val ? new Date(val).toLocaleDateString() : "—"),
+  },
+],
+
+pages: [
+  {
+    key: "pageNo",
+    title: "Page No",
+    dataIndex: "pageNo",
+  },
+  {
+    key: "image",
+    title: "Image",
+    render: (filePath, row) => renderImage(filePath, () => showModal(filePath, row)),
+  },
+  {
+    key: "subject",
+    title: "Subject",
+    render: (_, row) => row.subject?.name || "—",
+  },
+  {
+    key: "createdAt",
+    title: "Created At",
+    render: (val) => (val ? new Date(val).toLocaleDateString() : "—"),
+  },
+],
+
+
+
 user: [
       {
         key: "id",
